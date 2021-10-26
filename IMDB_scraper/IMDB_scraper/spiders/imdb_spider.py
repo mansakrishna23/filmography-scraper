@@ -46,10 +46,10 @@ class ImdbSpider(scrapy.Spider):
         Yields a dictionary with two key-value pairs: actor_name and movie_or_TV name 
         """
         actor_name = response.css("span.itemprop").get().split("<")[-2].split(">")[-1]
-        all_films = response.css("div.filmo-category-section a").getall()
+        all_films = response.css("div.filmo-category-section b").getall()
 
         for film in all_films: 
-            movie_or_TV_name = film.split("<")[-2].split(">")[-1]
+            movie_or_TV_name = film.split("<")[-3].split(">")[-1]
 
             yield {
                 "actor_name" : actor_name,
